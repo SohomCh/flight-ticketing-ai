@@ -1,37 +1,51 @@
-
-# backend/app/models/flights.py
-from typing import List, Optional, Literal
+# app/models/flights.py
+from __future__ import annotations
+from typing import List, Optional
 from pydantic import BaseModel, Field
+from pydantic import ConfigDict
 
+class Config:
+    pass
 
-class Seat(BaseModel):
+# Pydantic v2 style config (recommended)
+class BaseModelV2(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
+class Seat(BaseModelV2):
     seat_no: str
-    type: Literal["window", "middle", "aisle"]
+    type: str
     available: bool
-    price: int
+    price: float
 
-
-class Flight(BaseModel):
+class Flight(BaseModelV2):
     id: str
-    mode: Literal["flight"]
+    mode: str
+    # alias 'from' -> use attribute from_
+    from_: str = Field(..., alias="from")
+    to: str
+    date: str
+    departure: Optional[str] = None
+    arrival: Optional[str] = None
+    price: float
+    airline: Optional[str] = None
+    flight_number: Optional[str] = None
+    stops: Optional[int] = 0
+    layovers: Optional[List[Optional[str]]] = []
+    total_time: Optional[str] = None
+    seats: List[Seat] = []
 
-    # "from" and "to" are reserved-ish in Python, so we use aliases
-    origin: str = Field(alias="from")
-    destination: str = Field(alias="to")
+# Tools / request models for seat selection and holds
+class SeatSelection(BaseModelV2):
+    flight_id: str = Field(..., alias="flight_id")
+    seat_no: str
 
-    date: str            # you can later change to datetime.date
-    departure: str       # or time
-    arrival: str
+class HoldRequest(BaseModelV2):
+    flight_id: str
+    seat_no: str
+    session_id: Optional[str] = None
+    hold_ttl_seconds: Optional[int] = 600
 
-    price: int
-    airline: str
-    flight_number: str
-
-    stops: int
-    layovers: List[Optional[str]]
-    total_time: str
-
-    seats: List[Seat]
-
-    class Config:
-        populate_by_name = True  # allows using origin/destination in code, "from"/"to" in JSON
+class HoldResponse(BaseModelV2):
+    hold_id: str
+    status: str
+    expires_at: Optional[str] = None
