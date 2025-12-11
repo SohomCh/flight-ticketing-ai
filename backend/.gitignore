@@ -31,4 +31,4 @@ build/
 .DS_Store
 Thumbs.db
 
-backend.app.data.flights.json
+backend/app/data/flights.json
