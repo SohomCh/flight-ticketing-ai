@@ -1,8 +1,4 @@
-"""
-Routes for booking confirmation and getting booking details.
-Drop this file into backend/app/routes/booking.py
-"""
-
+# backend/app/routes/booking.py
 from fastapi import APIRouter, HTTPException, Body
 from pydantic import BaseModel
 from typing import Optional, Dict, Any
@@ -48,7 +44,6 @@ def confirm_booking(payload: BookRequest = Body(...)):
     passenger_name = payload.passenger_name or "Passenger"
     if payload.hold_id:
         # try to find hold in flights route in-memory HOLDS if available
-        # to avoid circular import, we'll attempt to import the data structure
         try:
             from app.routes.flights import HOLDS
         except Exception:

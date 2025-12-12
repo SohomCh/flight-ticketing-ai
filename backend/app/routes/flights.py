@@ -1,8 +1,4 @@
-"""
-Routes for flight search, flight detail, seatmap, and holding seats.
-Drop this file into backend/app/routes/flights.py
-"""
-
+# backend/app/routes/flights.py
 from fastapi import APIRouter, HTTPException, Body
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any
