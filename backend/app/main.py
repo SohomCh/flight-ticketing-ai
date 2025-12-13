@@ -4,7 +4,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.routes.flights import router as flights_router
 from app.routes.booking import router as booking_router
-from app.routes.seats import router as seat_router
+from app.routes.seats import router as seats_router
+
+
+
 
 app = FastAPI(title="Flight Booking API")
 
@@ -19,7 +22,7 @@ app.add_middleware(
 # include routers with prefixes
 app.include_router(flights_router, prefix="/flights")
 app.include_router(booking_router, prefix="/booking")
-app.include_router(seat_router, prefix="/seat")
+app.include_router(seats_router)
 
 
 @app.get("/")
