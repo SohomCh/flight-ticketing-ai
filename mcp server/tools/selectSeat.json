@@ -1,0 +1,22 @@
+{
+  "name": "selectSeat",
+  "description": "Select a specific seat for a given passenger on a flight.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "offerId": {
+        "type": "string",
+        "description": "Flight offer ID"
+      },
+      "passengerId": {
+        "type": "string",
+        "description": "Unique ID of the passenger"
+      },
+      "seatNumber": {
+        "type": "string",
+        "description": "Seat to assign (e.g., '12A')"
+      }
+    },
+    "required": ["offerId", "passengerId", "seatNumber"]
+  }
+}

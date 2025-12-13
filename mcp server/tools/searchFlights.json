@@ -1,0 +1,42 @@
+{
+  "name": "searchFlights",
+  "description": "Search for available flights based on origin, destination and travel dates.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "origin": {
+        "type": "string",
+        "description": "IATA code of departure airport",
+        "example": "SFO"
+      },
+      "destination": {
+        "type": "string",
+        "description": "IATA code of arrival airport",
+        "example": "JFK"
+      },
+      "departureDate": {
+        "type": "string",
+        "format": "date",
+        "description": "Departure date (YYYY-MM-DD)",
+        "example": "2026-01-15"
+      },
+      "returnDate": {
+        "type": "string",
+        "format": "date",
+        "description": "Return date — if round trip",
+        "example": "2026-01-22"
+      },
+      "adults": {
+        "type": "integer",
+        "default": 1,
+        "description": "Number of adult passengers"
+      },
+      "cabinClass": {
+        "type": "string",
+        "enum": ["economy", "premium_economy", "business", "first"],
+        "description": "Seat cabin class"
+      }
+    },
+    "required": ["origin", "destination", "departureDate"]
+  }
+}

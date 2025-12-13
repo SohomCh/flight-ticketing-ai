@@ -1,0 +1,19 @@
+{
+  "name": "holdFlight",
+  "description": "Place a temporary hold on a selected flight offer before booking.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "offerId": {
+        "type": "string",
+        "description": "Flight offer ID to place on hold"
+      },
+      "expireSeconds": {
+        "type": "integer",
+        "description": "How many seconds the hold remains valid",
+        "default": 900
+      }
+    },
+    "required": ["offerId"]
+  }
+}

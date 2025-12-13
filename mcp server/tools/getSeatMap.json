@@ -1,0 +1,18 @@
+{
+  "name": "getSeatMap",
+  "description": "Retrieve the seat map for a flight offer using offer ID and passenger type.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "offerId": {
+        "type": "string",
+        "description": "Flight offer ID received from flight search results"
+      },
+      "cabinClass": {
+        "type": "string",
+        "description": "Cabin class to view seats for"
+      }
+    },
+    "required": ["offerId"]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "bookFlight",
+  "description": "Book the chosen flight, with passenger info and payment details.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "offerId": {
+        "type": "string",
+        "description": "Flight offer ID to book"
+      },
+      "passengers": {
+        "type": "array",
+        "description": "Passenger details list",
+        "items": {
+          "type": "object",
+          "properties": {
+            "firstName": { "type": "string" },
+            "lastName": { "type": "string" },
+            "age": { "type": "integer" },
+            "gender": { "type": "string" }
+          },
+          "required": ["firstName", "lastName"]
+        }
+      },
+      "paymentMethod": {
+        "type": "string",
+        "enum": ["card", "paypal", "apple_pay"],
+        "description": "Preferred payment method"
+      },
+      "cardInfo": {
+        "type": "object",
+        "description": "Card payment details if paying by card",
+        "properties": {
+          "cardNumber": { "type": "string" },
+          "expiry": { "type": "string" },
+          "cvv": { "type": "string" }
+        }
+      }
+    },
+    "required": ["offerId", "passengers", "paymentMethod"]
+  }
+}
